@@ -22,7 +22,7 @@ namespace DurableFunctionDemo
             outputs.Add(await context.CallActivityAsync<string>("Function1_Hello", "Seattle"));
             outputs.Add(await context.CallActivityAsync<string>("Function1_Hello", "London"));
 
-            // returns ["Hello Tokyo!", "Hello Seattle!", "Hello London!"]
+            // returns ["Hello Tokyoo!", "Hello Seattle!", "Hello London!"]
             return outputs;
         }
 
