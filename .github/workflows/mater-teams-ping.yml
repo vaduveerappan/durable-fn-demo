@@ -32,10 +32,11 @@ jobs:
         
       - name: Display Github event variable "github.event.commits[0].author.name"
         run: echo "last commit author = ${{ github.event.commits[0].author.name }}" 
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+        
+      - name: Trigger teams post logic app
+        shell: pwsh
         run: |
-          $teamsURL = "https://prod-17.eastus.logic.azure.com:443/workflows/736eed9388ff451eb193197089ddd28b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Psvl8Z41gQxVk4DS1wqlCKjYN4noj-4g_ZYAG8mSIrY";
+          $teamsURL = "https://prod-17.eastus.logic.azure.com:443/workflows/736eed9388ff451eb193197089ddd28b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Psvl8Z41gQxVk4DS1wqlCKjYN4noj-4g_ZYAG8mSIrY"
           $postParams = @{username=${{ github.event.commits[0].author.name }};commitmessage=${{ github.event.commits[0].message }} }
           Invoke-WebRequest -Uri $teamsURL -Method POST -Body $postParams
+
